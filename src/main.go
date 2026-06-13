@@ -4,6 +4,6 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("Hello, World!")
+	fmt.Println("Hello, Mark! Today is 2026-06-12")
 
 }
