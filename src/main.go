@@ -4,6 +4,11 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("Hello, Mark! Today is 2026-06-12")
+	var name string = "Mark"
+	var age int32 = 123
+	var heightMeters float32 = 3.5
+	var isDevops bool = true
+
+	fmt.Println(name, age, heightMeters, isDevops)
 
 }
