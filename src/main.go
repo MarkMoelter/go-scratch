@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 func main() {
 
@@ -16,21 +13,42 @@ func main() {
 	// fmt.Println(name, age, heightMeters, isDevops)
 
 	// Day 3 - FizzBuzz
-	iter := 20
+	// iter := 20
 
-	for i := 1; i <= iter; i++ {
-		var output string = strconv.Itoa(i)
+	// for i := 1; i <= iter; i++ {
+	// 	var output string = strconv.Itoa(i)
 
-		if i%3 == 0 {
-			output = "Fizz"
-		}
-		if i%5 == 0 {
-			output = "Buzz"
-		}
-		if i%3 == 0 && i%5 == 0 {
-			output = "FizzBuzz"
-		}
+	// 	if i%3 == 0 {
+	// 		output = "Fizz"
+	// 	}
+	// 	if i%5 == 0 {
+	// 		output = "Buzz"
+	// 	}
+	// 	if i%3 == 0 && i%5 == 0 {
+	// 		output = "FizzBuzz"
+	// 	}
 
-		fmt.Println(output)
+	// 	fmt.Println(output)
+	// }
+
+	// Day 4
+	for i := 2; i <= 20; i++ {
+		if isPrime(i) {
+			fmt.Println(i)
+		}
 	}
+}
+
+func isPrime(num int) bool {
+	if num < 2 {
+		return false
+	}
+
+	for i := 2; i*i <= num; i++ {
+		if num%i == 0 {
+			return false
+		}
+	}
+
+	return true
 }
