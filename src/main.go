@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	// Day 2 - Variables, Mutability, and Types
 	// var name string = "Mark"
 	// var age int32 = 123
@@ -32,11 +31,32 @@ func main() {
 	// }
 
 	// Day 4
-	for i := 2; i <= 20; i++ {
-		if isPrime(i) {
-			fmt.Println(i)
+	// for i := 2; i <= 20; i++ {
+	// 	if isPrime(i) {
+	// 		fmt.Println(i)
+	// 	}
+	// }
+
+	// Day 5
+	var v []int
+	for i := 1; i <= 10; i++ {
+		v = append(v, i)
+	}
+
+	sum := 0
+	for i := range v {
+		sum += i
+	}
+
+	var avg float64 = float64(sum) / float64(len(v))
+
+	var evens []int
+	for i := range v {
+		if i%2 == 0 {
+			evens = append(evens, i)
 		}
 	}
+	fmt.Printf("sum=%d, avg=%.2f, evens=%v", sum, avg, evens)
 }
 
 func isPrime(num int) bool {
