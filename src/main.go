@@ -1,13 +1,30 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type Server struct {
 	Name     string
 	CPUCores uint32
 	IsActive bool
+}
+
+type Light int
+
+const (
+	Red Light = iota
+	Yellow
+	Green
+)
+
+func (l Light) String() string {
+	switch l {
+	case Red:
+		return "STOP"
+	case Yellow:
+		return "SLOW"
+	default:
+		return "GO"
+	}
 }
 
 func main() {
@@ -72,20 +89,28 @@ func main() {
 	// fmt.Println(longest(s1, s2))
 
 	// Day 7
-	servers := []Server{
-		{Name: "web-01", CPUCores: 4, IsActive: true},
-		{Name: "web-02", CPUCores: 4, IsActive: false},
-		{Name: "backend-01", CPUCores: 16, IsActive: true},
-	}
-	numActive := 0
-	for _, s := range servers {
-		fmt.Println(s.Name, "has", s.CPUCores, "cores")
+	// servers := []Server{
+	// 	{Name: "web-01", CPUCores: 4, IsActive: true},
+	// 	{Name: "web-02", CPUCores: 4, IsActive: false},
+	// 	{Name: "backend-01", CPUCores: 16, IsActive: true},
+	// }
+	// numActive := 0
+	// for _, s := range servers {
+	// 	fmt.Println(s.Name, "has", s.CPUCores, "cores")
 
-		if s.IsActive {
-			numActive++
-		}
+	// 	if s.IsActive {
+	// 		numActive++
+	// 	}
+	// }
+	// fmt.Println(numActive, "servers active")
+
+	// Day 7
+	lights := []Light{Red, Yellow, Green}
+	for _, l := range lights {
+		next := nextTrafficLight(l)
+
+		fmt.Println("Current:", l, "; Next:", next)
 	}
-	fmt.Println(numActive, "servers active")
 }
 
 func isPrime(num int) bool {
@@ -107,4 +132,15 @@ func longest(s1, s2 string) int {
 		return len(s1)
 	}
 	return len(s2)
+}
+
+func nextTrafficLight(l Light) Light {
+	switch l {
+	case Red:
+		return Green
+	case Green:
+		return Yellow
+	default:
+		return Red
+	}
 }
