@@ -38,25 +38,30 @@ func main() {
 	// }
 
 	// Day 5
-	var v []int
-	for i := 1; i <= 10; i++ {
-		v = append(v, i)
-	}
+	// var v []int
+	// for i := 1; i <= 10; i++ {
+	// 	v = append(v, i)
+	// }
 
-	sum := 0
-	for i := range v {
-		sum += i
-	}
+	// sum := 0
+	// for i := range v {
+	// 	sum += i
+	// }
 
-	var avg float64 = float64(sum) / float64(len(v))
+	// var avg float64 = float64(sum) / float64(len(v))
 
-	var evens []int
-	for i := range v {
-		if i%2 == 0 {
-			evens = append(evens, i)
-		}
-	}
-	fmt.Printf("sum=%d, avg=%.2f, evens=%v", sum, avg, evens)
+	// var evens []int
+	// for i := range v {
+	// 	if i%2 == 0 {
+	// 		evens = append(evens, i)
+	// 	}
+	// }
+	// fmt.Printf("sum=%d, avg=%.2f, evens=%v", sum, avg, evens)
+
+	// Day 6
+	s1 := "testing testing"
+	s2 := "testing"
+	fmt.Println(longest(s1, s2))
 }
 
 func isPrime(num int) bool {
@@ -71,4 +76,12 @@ func isPrime(num int) bool {
 	}
 
 	return true
+}
+
+func longest(s1, s2 string) int {
+	if len(s1) > len(s2) {
+		return len(s1)
+	} else {
+		return len(s2)
+	}
 }
