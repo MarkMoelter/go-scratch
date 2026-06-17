@@ -1,6 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+type Server struct {
+	Name     string
+	CPUCores uint32
+	IsActive bool
+}
 
 func main() {
 	// Day 2 - Variables, Mutability, and Types
@@ -59,9 +67,25 @@ func main() {
 	// fmt.Printf("sum=%d, avg=%.2f, evens=%v", sum, avg, evens)
 
 	// Day 6
-	s1 := "testing testing"
-	s2 := "testing"
-	fmt.Println(longest(s1, s2))
+	// s1 := "testing testing"
+	// s2 := "testing"
+	// fmt.Println(longest(s1, s2))
+
+	// Day 7
+	servers := []Server{
+		{Name: "web-01", CPUCores: 4, IsActive: true},
+		{Name: "web-02", CPUCores: 4, IsActive: false},
+		{Name: "backend-01", CPUCores: 16, IsActive: true},
+	}
+	numActive := 0
+	for _, s := range servers {
+		fmt.Println(s.Name, "has", s.CPUCores, "cores")
+
+		if s.IsActive {
+			numActive++
+		}
+	}
+	fmt.Println(numActive, "servers active")
 }
 
 func isPrime(num int) bool {
