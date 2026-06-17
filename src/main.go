@@ -81,7 +81,6 @@ func isPrime(num int) bool {
 func longest(s1, s2 string) int {
 	if len(s1) > len(s2) {
 		return len(s1)
-	} else {
-		return len(s2)
 	}
+	return len(s2)
 }
