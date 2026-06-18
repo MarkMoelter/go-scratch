@@ -27,30 +27,14 @@ func (l Light) String() string {
 	}
 }
 
-type Rectangle struct {
-	Width, Height float64
-}
+type Rectangle struct{ Width, Height float64 }
 
-func (r Rectangle) Area() float64 {
-	return r.Width * r.Height
-}
+func NewSquare(side float64) Rectangle { return Rectangle{Width: side, Height: side} }
 
-func (r *Rectangle) Scale(factor float64) {
-	r.Width *= factor
-	r.Height *= factor
-}
-
-func NewSquare(side float64) Rectangle {
-	return Rectangle{Width: side, Height: side}
-}
-
-func (r Rectangle) Perimeter() float64 {
-	return r.Width*2 + r.Height*2
-}
-
-func (r Rectangle) IsSquare() bool {
-	return r.Width == r.Height
-}
+func (r *Rectangle) Scale(factor float64) { r.Width *= factor; r.Height *= factor }
+func (r Rectangle) Area() float64         { return r.Width * r.Height }
+func (r Rectangle) Perimeter() float64    { return 2 * (r.Width + r.Height) }
+func (r Rectangle) IsSquare() bool        { return r.Width == r.Height }
 
 func main() {
 	// Day 1 - Hello World & Toolchain
