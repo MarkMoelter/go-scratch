@@ -116,13 +116,30 @@ func main() {
 	// }
 
 	// Day 9 - Methods
-	s := NewSquare(4.0)
-	s.Scale(2.0)
-	fmt.Println("area =", s.Area(), "; perimeter = ", s.Perimeter(), "; is a square = ", s.IsSquare())
+	// s := NewSquare(4.0)
+	// s.Scale(2.0)
+	// fmt.Println("area =", s.Area(), "; perimeter = ", s.Perimeter(), "; is a square = ", s.IsSquare())
+	// r := Rectangle{Width: 4.0, Height: 3.0}
+	// r.Scale(2.0)
+	// fmt.Println("area =", r.Area(), "; perimeter = ", r.Perimeter(), "; is a square = ", r.IsSquare())
 
-	r := Rectangle{Width: 4.0, Height: 3.0}
-	r.Scale(2.0)
-	fmt.Println("area =", r.Area(), "; perimeter = ", r.Perimeter(), "; is a square = ", r.IsSquare())
+	// Day 10 - Maps & Iterators
+	hosts := map[string]uint32{
+		"web-01":  4,
+		"web-02":  4,
+		"db-01":   8,
+		"bcdr-01": 16,
+	}
+
+	var maxName string
+	var maxCores uint32
+	for name, cores := range hosts {
+		if cores > maxCores {
+			maxCores = cores
+			maxName = name
+		}
+	}
+	fmt.Println(maxName, maxCores)
 }
 
 // Day 4
