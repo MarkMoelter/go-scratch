@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Server struct {
 	Name     string
 	CPUCores uint32
@@ -23,6 +25,31 @@ func (l Light) String() string {
 	default:
 		return "GO"
 	}
+}
+
+type Rectangle struct {
+	Width, Height float64
+}
+
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+func (r *Rectangle) Scale(factor float64) {
+	r.Width *= factor
+	r.Height *= factor
+}
+
+func NewSquare(side float64) Rectangle {
+	return Rectangle{Width: side, Height: side}
+}
+
+func (r Rectangle) Perimeter() float64 {
+	return r.Width*2 + r.Height*2
+}
+
+func (r Rectangle) IsSquare() bool {
+	return r.Width == r.Height
 }
 
 func main() {
@@ -103,6 +130,15 @@ func main() {
 	// 	next := nextTrafficLight(l)
 	// 	fmt.Println("Current:", l, "; Next:", next)
 	// }
+
+	// Day 9 - Methods
+	s := NewSquare(4.0)
+	s.Scale(2.0)
+	fmt.Println("area =", s.Area(), "; perimeter = ", s.Perimeter(), "; is a square = ", s.IsSquare())
+
+	r := Rectangle{Width: 4.0, Height: 3.0}
+	r.Scale(2.0)
+	fmt.Println("area =", r.Area(), "; perimeter = ", r.Perimeter(), "; is a square = ", r.IsSquare())
 }
 
 // Day 4
