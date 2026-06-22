@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"strconv"
+)
 
 type Server struct {
 	Name     string
@@ -124,22 +128,41 @@ func main() {
 	// fmt.Println("area =", r.Area(), "; perimeter = ", r.Perimeter(), "; is a square = ", r.IsSquare())
 
 	// Day 10 - Maps & Iterators
-	hosts := map[string]uint32{
-		"web-01":  4,
-		"web-02":  4,
-		"db-01":   8,
-		"bcdr-01": 16,
+	// hosts := map[string]uint32{
+	// 	"web-01":  4,
+	// 	"web-02":  4,
+	// 	"db-01":   8,
+	// 	"bcdr-01": 16,
+	// }
+	// var maxName string
+	// var maxCores uint32
+	// for name, cores := range hosts {
+	// 	if cores > maxCores {
+	// 		maxCores = cores
+	// 		maxName = name
+	// 	}
+	// }
+	// fmt.Println(maxName, maxCores)
+
+	// Day 11 - Error Handling
+	result, err := divide(10, 2)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println("result =", result)
 	}
 
-	var maxName string
-	var maxCores uint32
-	for name, cores := range hosts {
-		if cores > maxCores {
-			maxCores = cores
-			maxName = name
-		}
+	_, err = divide(10, 0)
+	if err != nil {
+		fmt.Println("error:", err)
 	}
-	fmt.Println(maxName, maxCores)
+
+	pInt, err := parsePositiveInt("6")
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println("result =", pInt)
+	}
 }
 
 // Day 4
@@ -175,4 +198,24 @@ func nextTrafficLight(l Light) Light {
 	default:
 		return Red
 	}
+}
+
+// Day 11
+func divide(a, b float64) (float64, error) {
+	if b == 0 {
+		return 0, errors.New("division by zero")
+	}
+	return a / b, nil
+}
+
+func parsePositiveInt(s string) (uint32, error) {
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		return 0, errors.New("not a number")
+	}
+	if n < 0 {
+		return 0, errors.New("negative")
+	}
+	return uint32(n), nil
+
 }
