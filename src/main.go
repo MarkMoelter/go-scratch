@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cmp"
 	"errors"
 	"fmt"
 	"math"
@@ -52,6 +53,28 @@ type Shape interface{ Area() float64 }
 type Circle struct{ Radius float64 }
 
 func (c Circle) Area() float64 { return math.Pow(c.Radius, 2) * math.Pi }
+
+type Stack[T any] struct{ items []T }
+
+func (s *Stack[T]) Push(item T) { s.items = append(s.items, item) }
+
+func (s *Stack[T]) Pop() (T, bool) {
+	var zero T
+	if len(s.items) == 0 {
+		return zero, false
+	}
+	last := s.items[len(s.items)-1]
+	s.items = s.items[:len(s.items)-1]
+	return last, true
+}
+
+func (s Stack[T]) Peek() (T, bool) {
+	var zero T
+	if len(s.items) == 0 {
+		return zero, false
+	}
+	return s.items[len(s.items)-1], true
+}
 
 func main() {
 	// Day 1 - Hello World & Toolchain
@@ -176,19 +199,37 @@ func main() {
 	// }
 
 	// Day 12 - Interfaces
-	s := Server{Name: "web-01", CPUCores: 4, IsActive: true}
-	d := Database{Name: "db-01", Engine: "SQL Server"}
+	// s := Server{Name: "web-01", CPUCores: 4, IsActive: true}
+	// d := Database{Name: "db-01", Engine: "SQL Server"}
+	// items := []Describable{s, d}
+	// printAll(items)
+	// r := Rectangle{Height: 5.0, Width: 3.0}
+	// c := Circle{Radius: 10}
+	// shapes := []Shape{r, c}
+	// for _, item := range shapes {
+	// 	fmt.Println(item.Area())
+	// }
 
-	items := []Describable{s, d}
-	printAll(items)
+	// Day 13 - Generics
+	fmt.Println(Largest([]int{3, 7, 2, 9, 4}))
+	fmt.Println(Largest([]float64{1.5, 2.5, 0.5}))
 
-	r := Rectangle{Height: 5.0, Width: 3.0}
-	c := Circle{Radius: 10}
+	int_stack := Stack[int]{}
+	int_stack.Push(10)
+	int_stack.Push(7)
+	int_stack.Push(109)
 
-	shapes := []Shape{r, c}
-	for _, item := range shapes {
-		fmt.Println(item.Area())
-	}
+	pop, _ := int_stack.Pop()
+	peek, _ := int_stack.Peek()
+	fmt.Println("Popped:", pop)
+	fmt.Println("Peek:", peek)
+
+	str_stack := Stack[string]{}
+	str_stack.Push("hello")
+	str_stack.Push("world")
+
+	str_pop, _ := str_stack.Pop()
+	fmt.Println("Popped:", str_pop)
 }
 
 // Day 4
@@ -250,4 +291,14 @@ func printAll(items []Describable) {
 	for _, item := range items {
 		fmt.Println(item.Describe())
 	}
+}
+
+func Largest[T cmp.Ordered](items []T) T {
+	max := items[0]
+	for _, item := range items {
+		if item > max {
+			max = item
+		}
+	}
+	return max
 }
