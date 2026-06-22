@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -39,6 +40,18 @@ func (r *Rectangle) Scale(factor float64) { r.Width *= factor; r.Height *= facto
 func (r Rectangle) Area() float64         { return r.Width * r.Height }
 func (r Rectangle) Perimeter() float64    { return 2 * (r.Width + r.Height) }
 func (r Rectangle) IsSquare() bool        { return r.Width == r.Height }
+
+type Describable interface{ Describe() string }
+
+type Database struct{ Name, Engine string }
+
+func (s Server) Describe() string   { return "Server: " + s.Name }
+func (d Database) Describe() string { return fmt.Sprintf("Database: %s (%s)", d.Name, d.Engine) }
+
+type Shape interface{ Area() float64 }
+type Circle struct{ Radius float64 }
+
+func (c Circle) Area() float64 { return math.Pow(c.Radius, 2) * math.Pi }
 
 func main() {
 	// Day 1 - Hello World & Toolchain
@@ -145,23 +158,36 @@ func main() {
 	// fmt.Println(maxName, maxCores)
 
 	// Day 11 - Error Handling
-	result, err := divide(10, 2)
-	if err != nil {
-		fmt.Println("error:", err)
-	} else {
-		fmt.Println("result =", result)
-	}
+	// result, err := divide(10, 2)
+	// if err != nil {
+	// 	fmt.Println("error:", err)
+	// } else {
+	// 	fmt.Println("result =", result)
+	// }
+	// _, err = divide(10, 0)
+	// if err != nil {
+	// 	fmt.Println("error:", err)
+	// }
+	// pInt, err := parsePositiveInt("6")
+	// if err != nil {
+	// 	fmt.Println("error:", err)
+	// } else {
+	// 	fmt.Println("result =", pInt)
+	// }
 
-	_, err = divide(10, 0)
-	if err != nil {
-		fmt.Println("error:", err)
-	}
+	// Day 12 - Interfaces
+	s := Server{Name: "web-01", CPUCores: 4, IsActive: true}
+	d := Database{Name: "db-01", Engine: "SQL Server"}
 
-	pInt, err := parsePositiveInt("6")
-	if err != nil {
-		fmt.Println("error:", err)
-	} else {
-		fmt.Println("result =", pInt)
+	items := []Describable{s, d}
+	printAll(items)
+
+	r := Rectangle{Height: 5.0, Width: 3.0}
+	c := Circle{Radius: 10}
+
+	shapes := []Shape{r, c}
+	for _, item := range shapes {
+		fmt.Println(item.Area())
 	}
 }
 
@@ -218,4 +244,10 @@ func parsePositiveInt(s string) (uint32, error) {
 	}
 	return uint32(n), nil
 
+}
+
+func printAll(items []Describable) {
+	for _, item := range items {
+		fmt.Println(item.Describe())
+	}
 }
