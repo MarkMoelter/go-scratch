@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"scratch/fizzbuzz"
+	"scratch/network"
 	"strconv"
 )
 
@@ -211,25 +213,29 @@ func main() {
 	// }
 
 	// Day 13 - Generics
-	fmt.Println(Largest([]int{3, 7, 2, 9, 4}))
-	fmt.Println(Largest([]float64{1.5, 2.5, 0.5}))
+	// fmt.Println(Largest([]int{3, 7, 2, 9, 4}))
+	// fmt.Println(Largest([]float64{1.5, 2.5, 0.5}))
+	// int_stack := Stack[int]{}
+	// int_stack.Push(10)
+	// int_stack.Push(7)
+	// int_stack.Push(109)
+	// pop, _ := int_stack.Pop()
+	// peek, _ := int_stack.Peek()
+	// fmt.Println("Popped:", pop)
+	// fmt.Println("Peek:", peek)
+	// str_stack := Stack[string]{}
+	// str_stack.Push("hello")
+	// str_stack.Push("world")
+	// str_pop, _ := str_stack.Pop()
+	// fmt.Println("Popped:", str_pop)
 
-	int_stack := Stack[int]{}
-	int_stack.Push(10)
-	int_stack.Push(7)
-	int_stack.Push(109)
+	// Day 14 - Packages
+	network.Ping("10.0.0.1")
 
-	pop, _ := int_stack.Pop()
-	peek, _ := int_stack.Peek()
-	fmt.Println("Popped:", pop)
-	fmt.Println("Peek:", peek)
-
-	str_stack := Stack[string]{}
-	str_stack.Push("hello")
-	str_stack.Push("world")
-
-	str_pop, _ := str_stack.Pop()
-	fmt.Println("Popped:", str_pop)
+	for i := 1; i <= 20; i++ {
+		out := fizzbuzz.FizzBuzz(uint32(i))
+		fmt.Println(out)
+	}
 }
 
 // Day 4
