@@ -239,6 +239,7 @@ func main() {
 }
 
 // Day 4
+//nolint:unused
 func isPrime(num int) bool {
 	if num < 2 {
 		return false
@@ -254,6 +255,7 @@ func isPrime(num int) bool {
 }
 
 // Day 6
+//nolint:unused
 func longest(s1, s2 string) int {
 	if len(s1) > len(s2) {
 		return len(s1)
@@ -262,6 +264,7 @@ func longest(s1, s2 string) int {
 }
 
 // Day 8
+//nolint:unused
 func nextTrafficLight(l Light) Light {
 	switch l {
 	case Red:
@@ -274,6 +277,7 @@ func nextTrafficLight(l Light) Light {
 }
 
 // Day 11
+//nolint:unused
 func divide(a, b float64) (float64, error) {
 	if b == 0 {
 		return 0, errors.New("division by zero")
@@ -281,6 +285,7 @@ func divide(a, b float64) (float64, error) {
 	return a / b, nil
 }
 
+//nolint:unused
 func parsePositiveInt(s string) (uint32, error) {
 	n, err := strconv.Atoi(s)
 	if err != nil {
@@ -293,13 +298,15 @@ func parsePositiveInt(s string) (uint32, error) {
 
 }
 
+//nolint:unused
 func printAll(items []Describable) {
 	for _, item := range items {
 		fmt.Println(item.Describe())
 	}
 }
 
-func Largest[T cmp.Ordered](items []T) T {
+//nolint:unused
+func largest[T cmp.Ordered](items []T) T {
 	max := items[0]
 	for _, item := range items {
 		if item > max {
