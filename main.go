@@ -5,8 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
-	"scratch/fizzbuzz"
-	"scratch/network"
+	"scratch/mathutil"
 	"strconv"
 )
 
@@ -106,11 +105,11 @@ func main() {
 	// }
 
 	// Day 4 - Functions
-	// for i := 2; i <= 20; i++ {
-	// 	if isPrime(i) {
-	// 		fmt.Println(i)
-	// 	}
-	// }
+	for i := 2; i <= 20; i++ {
+		if mathutil.IsPrime(i) {
+			fmt.Println(i)
+		}
+	}
 
 	// Day 5 - Collections — Slices, Strings
 	// var v []int
@@ -230,28 +229,11 @@ func main() {
 	// fmt.Println("Popped:", str_pop)
 
 	// Day 14 - Packages
-	network.Ping("10.0.0.1")
-
-	for i := 1; i <= 20; i++ {
-		out := fizzbuzz.FizzBuzz(uint32(i))
-		fmt.Println(out)
-	}
-}
-
-// Day 4
-//nolint:unused
-func isPrime(num int) bool {
-	if num < 2 {
-		return false
-	}
-
-	for i := 2; i*i <= num; i++ {
-		if num%i == 0 {
-			return false
-		}
-	}
-
-	return true
+	// network.Ping("10.0.0.1")
+	// for i := 1; i <= 20; i++ {
+	// 	out := fizzbuzz.FizzBuzz(uint32(i))
+	// 	fmt.Println(out)
+	// }
 }
 
 // Day 6
