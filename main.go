@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
-	"scratch/mathutil"
+	"sort"
 	"strconv"
 )
 
@@ -105,11 +105,11 @@ func main() {
 	// }
 
 	// Day 4 - Functions
-	for i := 2; i <= 20; i++ {
-		if mathutil.IsPrime(i) {
-			fmt.Println(i)
-		}
-	}
+	// for i := 2; i <= 20; i++ {
+	// 	if mathutil.IsPrime(i) {
+	// 		fmt.Println(i)
+	// 	}
+	// }
 
 	// Day 5 - Collections — Slices, Strings
 	// var v []int
@@ -234,6 +234,33 @@ func main() {
 	// 	out := fizzbuzz.FizzBuzz(uint32(i))
 	// 	fmt.Println(out)
 	// }
+
+	// Day 16 - Concurrency
+	// ch := make(chan string, 3)
+	// for i := 0; i < 3; i++ {
+	// 	go func() {
+	// 		ch <- fmt.Sprintf("worker %d done", i)
+	// 	}()
+	// }
+	// for i := 0; i < 3; i++ {
+	// 	fmt.Println(<-ch)
+	// }
+
+	ch := make(chan int, 5)
+
+	for i := 0; i < 5; i++ {
+		go func() {
+			ch <- int(math.Pow(float64(i), 2))
+		}()
+	}
+
+	results := []int{}
+	for i := 0; i < 5; i++ {
+		results = append(results, <-ch)
+	}
+
+	sort.Ints(results)
+	fmt.Println(results)
 }
 
 // Day 6
