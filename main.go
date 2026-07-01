@@ -274,7 +274,7 @@ func main() {
 	// wg.Wait()
 	// fmt.Println("result =", counter)
 
-	var success_count int
+	var successCount int
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
@@ -284,7 +284,7 @@ func main() {
 			defer wg.Done()
 			mu.Lock()
 			if true {
-				success_count++
+				successCount++
 			}
 			mu.Unlock()
 		}()
