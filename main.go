@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"math/rand/v2"
 	"strconv"
 	"sync"
 )
@@ -283,7 +284,8 @@ func main() {
 		go func() {
 			defer wg.Done()
 			mu.Lock()
-			if true {
+			flip := rand.IntN(2) == 1
+			if flip {
 				successCount++
 			}
 			mu.Unlock()
@@ -291,7 +293,7 @@ func main() {
 	}
 
 	wg.Wait()
-	fmt.Println("result =", success_count)
+	fmt.Println("result =", successCount)
 }
 
 // Day 6
