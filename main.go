@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"math"
-	"sort"
 	"strconv"
+	"sync"
 )
 
 type Server struct {
@@ -245,22 +245,53 @@ func main() {
 	// for i := 0; i < 3; i++ {
 	// 	fmt.Println(<-ch)
 	// }
+	// ch := make(chan int, 5)
+	// for i := 0; i < 5; i++ {
+	// 	go func() {
+	// 		ch <- int(math.Pow(float64(i), 2))
+	// 	}()
+	// }
+	// results := []int{}
+	// for i := 0; i < 5; i++ {
+	// 	results = append(results, <-ch)
+	// }
+	// sort.Ints(results)
+	// fmt.Println(results)
 
-	ch := make(chan int, 5)
+	// Day 17
+	// var counter int
+	// var mu sync.Mutex
+	// var wg sync.WaitGroup
+	// for i := 0; i < 10; i++ {
+	// 	wg.Add(1)
+	// 	go func() {
+	// 		defer wg.Done()
+	// 		mu.Lock()
+	// 		counter++
+	// 		mu.Unlock()
+	// 	}()
+	// }
+	// wg.Wait()
+	// fmt.Println("result =", counter)
 
-	for i := 0; i < 5; i++ {
+	var success_count int
+	var mu sync.Mutex
+	var wg sync.WaitGroup
+
+	for i := 0; i < 20; i++ {
+		wg.Add(1)
 		go func() {
-			ch <- int(math.Pow(float64(i), 2))
+			defer wg.Done()
+			mu.Lock()
+			if true {
+				success_count++
+			}
+			mu.Unlock()
 		}()
 	}
 
-	results := []int{}
-	for i := 0; i < 5; i++ {
-		results = append(results, <-ch)
-	}
-
-	sort.Ints(results)
-	fmt.Println(results)
+	wg.Wait()
+	fmt.Println("result =", success_count)
 }
 
 // Day 6
